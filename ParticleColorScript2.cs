@@ -11,14 +11,11 @@ public class ParticleColorScript2 : MonoBehaviour {
 	public Color startColor;
 	public Color endColor;
 
-	// Use this for initialization
 	void Start () {
-
 		ps = this.GetComponent<ParticleSystem>();
 		Debug.Log(ps.name);
 	}
 
-	// Update is called once per frame
 	void Update ()
 	{
 		psColor = Color.Lerp (startColor, endColor, time);
