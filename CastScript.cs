@@ -5,7 +5,6 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class CastScript : MonoBehaviour {
-
 	public GameObject bird;
 	public LayerMask objectToHit;
 
