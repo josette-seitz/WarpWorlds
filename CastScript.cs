@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,16 +31,13 @@ public class CastScript : MonoBehaviour {
 	public GameObject warpWorldText;
 	public GameObject starWarsText;
 
-	// Use this for initialization
 	void Start ()
 	{
-        pathPoints.Add (Camera.main.transform);
+    pathPoints.Add (Camera.main.transform);
 		winterPS = bird.gameObject.transform.Find("Winter PS").gameObject;
 		winterPS.SetActiveRecursively(false);
-//		pathIndex = pathPoints.Count -2;
 		birdSound = GetComponent<AudioSource> ();
 		magic = GameObject.Find("Magical World");
-
 
 		planets.gameObject.SetActive(false);
 
@@ -49,14 +46,8 @@ public class CastScript : MonoBehaviour {
 				worlds[i].gameObject.SetActive(false);
 			}
 		}
-
-//		particleSystem[0].gameObject.SetActive(false);
-//		particleSystem[1].gameObject.SetActive(false);
-//		particleSystem[2].gameObject.SetActive(false);
-
 	}
 	
-	// Update is called once per frame
 	void FixedUpdate ()
 	{
 		RaycastHit hit;
@@ -87,7 +78,6 @@ public class CastScript : MonoBehaviour {
 		 	Debug.Log("Transition to next world");
 		 	TransitionToNextWorld();
 		}
-
 		else pathIndex++;
 	}
 
@@ -103,15 +93,9 @@ public class CastScript : MonoBehaviour {
 		worlds [worldIndex].transform.parent = null;
 		sphere = worlds [worldIndex].gameObject.transform.Find ("SphereInvertedMesh").gameObject;
 		sphere.transform.parent = null;
-
-//		currentParticleSystem.gameObject.SetActive(false);
-//		particleSystem[0].gameObject.SetActive(true);
-
+		
 		//Scale new world
-		iTween.ScaleTo (sphere, Vector3.one * 5000f, 1.5f);
-
-//		Destroy (currentParticleSystem.gameObject);
-//		currentParticleSystem = particleSystem [worldIndex];
+		iTween.ScaleTo (sphere, Vector3.one * 700f, 1.5f);
 
 		//delete previous world
 		Destroy (currentWorld.gameObject);
@@ -133,12 +117,11 @@ public class CastScript : MonoBehaviour {
 			foreach (Renderer child in childPlanets) {
 				child.enabled = false;
 			}
-			sphere.GetComponent<CustomDissolve> ().Dissolve ();
+			sphere.GetComponent<CustomDissolve>().Dissolve();
 			StartCoroutine(AfterDissolve());
 			Invoke("BlackDissolve", 45f);
 		}
-
-
+		
 		if (worlds [worldIndex] == worlds [0]) {			
 			bird.GetComponent<Collider> ().enabled = false;
 			AudioSource spaceSound = magic.GetComponent<AudioSource> ();
@@ -149,30 +132,12 @@ public class CastScript : MonoBehaviour {
 			Invoke("InvertedSphereDup", 10f);
 			Invoke("EnableBird", 30f);
 		}
-
-//		//reset path points (create new)
-//		pathPoints = currentWorld.newPathPoints;
-//		pathPoints.Add (Camera.main.transform);
-//		//set path index back to 0 (start over)
-//		pathIndex = 0;
-//
-//		//make sure not end of world list
-//		if (worldIndex + 1 < worlds.Count) {
-//			worldIndex++;	
-//		} else {
-//			Debug.Log("We reach the end of world list");
-//		}
-//
-//		worlds[worldIndex].gameObject.SetActive(true);
-//
-//		//bird at new start position
-//		MoveBirdToNextPoint();
 	}
 
 	void InvertedSphereDup ()
 	{
-		dupInvertedSphere = Instantiate(invertedSphere, new Vector3(0, 10f, -500f), invertedSphere.transform.rotation);
-		dupInvertedSphere.transform.localScale = new Vector3(1000, 1000, 1000);
+		dupInvertedSphere = Instantiate(invertedSphere, new Vector3(0, 4f, -475f), invertedSphere.transform.rotation);
+		dupInvertedSphere.transform.localScale = new Vector3(700, 700, 700);
 		dupInvertedSphere.AddComponent<RotateScript>();
 	}
 
@@ -203,22 +168,10 @@ public class CastScript : MonoBehaviour {
 
 	private IEnumerator FinalCredits ()
 	{
-		//not sure if below code works (need to google)
-		//float winterWorldAudioLength = worlds [1].GetComponent<AudioClip> ().length;
-
 		yield return new WaitForSeconds (10.5f);
 		{
 			warpWorldText.SetActive(true);
 			starWarsText.SetActive(true);
 		}
-
 	}
 }
-
-
-//RaycastHit[] sphereHit = Physics.SphereCastAll (transform.position, 1000f, Vector3.forward, Mathf.Infinity);
-//				for (int i = 0; i < sphereHit.Length; i++) {
-//						if (sphereHit[i].collider.name == "Eagle") {
-//						iTween.MoveTo(bird, iTween.Hash("position", Camera.main.transform.position, 
-//														"looktarget", Camera.main.transform.position, 
-//														"time", 8.5));
