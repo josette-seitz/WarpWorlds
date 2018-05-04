@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ParticleColorScript2 : MonoBehaviour {
-
 	private ParticleSystem ps;
 	private Color psColor;
 	private float duration = 8;
