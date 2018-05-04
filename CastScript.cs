@@ -95,7 +95,6 @@ public class CastScript : MonoBehaviour {
 		
 		//Scale new world
 		iTween.ScaleTo (sphere, Vector3.one * 700f, 1.5f);
-
 		//delete previous world
 		Destroy (currentWorld.gameObject);
 		currentWorld = worlds [worldIndex];
