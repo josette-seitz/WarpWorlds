@@ -12,13 +12,11 @@ public class PathScript : MonoBehaviour {
 
 	GameObject lookTarget;
 
-	// Use this for initialization
 	void Start () {
 		startTime = Time.time;
 		lookTarget = new GameObject();
 	}
 
-	// Update is called once per frame
 	void Update ()
 	{
 		currTime = Time.time;
