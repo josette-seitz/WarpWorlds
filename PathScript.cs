@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PathScript : MonoBehaviour {
-
 	public Transform [] myPath;
 	public float pathDur; 
 	private float startTime;
 	public float currTime;
 	public float percent;
-
 	GameObject lookTarget;
 
 	void Start () {
